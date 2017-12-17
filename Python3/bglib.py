@@ -615,7 +615,7 @@ class BGLib(object):
     debug = False
 
     def send_command(self, ser, packet):
-        if self.packet_mode: packet = chr(len(packet) & 0xFF) + packet
+        if self.packet_mode: packet = bytes([len(packet) & 0xFF]) + packet
         if self.debug: print('=>[ ' + ' '.join(['%02X' % b for b in packet]) + ' ]')
         self.on_before_tx_command()
         self.busy = True
